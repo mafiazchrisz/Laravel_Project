@@ -37,3 +37,5 @@ Route::get('/add-role', [RoleController::class, 'addRole']);
 Route::get('/add-users', [RoleController::class, 'addUsers']);
 Route::get('/rolesbyuser/{id}', [RoleController::class, 'getAllRolesByUser']);
 Route::get('/usersbyrole/{id}', [RoleController::class, 'getAllUsersByRole']);
+
+Route::resource('products', ProductController::class);
