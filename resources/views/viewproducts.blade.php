@@ -1,50 +1,89 @@
+@extends('layouts.app-master')
+
+@section('content')
 <!DOCTYPE html>
-<html lang="{{ config('app.url')}}">
+<html lang="{{ app()->getLocale() }}">
 
 <head>
-    <title>View Products | Product Store</title>
+    <title> View Products | Product Store </title>
+
 </head>
 
 <body>
-    <div class="links">
-        <a href="{{ config('app.url')}}">Home</a>
-    </div>
-    <div class="flex-center position-ref full-height">
+    <div class="bg-light p-5 rounded">
+        @auth
+        <div class="flex-center position-ref full-height">
+            <div class="content">
+                Here's a list of avaliable products
+                <table>
+                    <thead>
+                        <td> </td>
+                        <td> ID </td>
+                        <td> Name </td>
+                        <td> Description </td>
+                        <td> Count </td>
+                        <td> Price </td>
+                        <td>
+                            <a href="{{ config('app.url')}}/products/create" class="btn btn-sm btn-primary">Add</a>
+                        </td>
+                    </thead>
+                    <tbody>
+                        @foreach( $products as $product )
+                        <tr>
+                            <td>
+                                <a href="{{    url('products/'.$product->id.'/edit')}}" class="btnbtn  -sm  btn  -primary">Edit</a>
+                            </td>
+                            <td>{{ $product->id }}</td>
+                            <td>{{ $product->name }}</td>
+                            <td class="inner-class">{{ $product->description }}</td>
+                            <td class="inner-class">{{ $product->count }}</td>
+                            <td class="inner-class">{{ $product->price }}</td>
+                            <td>
+                                <form action="{{ url('products/'.$product->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-primary"> Delete </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @endauth
+
+        @guest
         <div class="content">
-            <h1>Here's a list of avaliable products</h1>
+            Here's a list of avaliable products
             <table>
                 <thead>
                     <td> </td>
-                    <td>ID</td>
-                    <td>Name</td>
-                    <td>Description</td>
-                    <td>Count</td>
-                    <td>Price</td>
+                    <td> ID </td>
+                    <td> Name </td>
+                    <td> Description </td>
+                    <td> Count </td>
+                    <td> Price </td>
+
                 </thead>
+
                 <tbody>
                     @foreach( $products as $product )
                     <tr>
-                        <td>
-                            <a href="{{ url('products/'.$product->id.'/edit') }}" class="btn btn-sm btn-primary">Edit</a>
-                        </td>
+                        <td> </td>
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->name }}</td>
-                        <td class=" inner-table">{{ $product->description }}</td>
-                        <td class="inner-table">{{ $product->count }}</td>
-                        <td class="inner-table">{{ $product->price }}</td>
-                        <td>
-                            <form action="{{ url('products/'.$product->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type='submit' class="btn btn-sm btn-primary">Delete</button>
-                            </form>
-                        </td>
+                        <td class="inner-class">{{ $product->description }}</td>
+                        <td class="inner-class">{{ $product->count }}</td>
+                        <td class="inner-class">{{ $product->price }}</td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+    @endguest
 </body>
 
 </html>
+@endsection

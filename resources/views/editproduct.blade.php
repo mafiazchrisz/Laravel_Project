@@ -1,22 +1,24 @@
+@extends('layouts.auth-master')
+
+@section('content')
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html>
 
 <head>
-    <title>Create Product | Product Store</title>
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <!-- Style -->
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 
 <body>
-    <div class="links">
-        <a href="{{ config('app.url')}}">Home</a>
-    </div>
     <div class="flex-center position-ref full-height">
+        @auth
         <div class="content">
             <form action="{{ url('products/'.$product->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <h1> Enter New Details of a product</h1>
+                <h1> Enter New Details of a product </h1>
                 <div class="form-input">
                     <label>Name</label>
                     <input type="text" name="name" value="{{ $product->name }}">
@@ -33,12 +35,20 @@
                     <label>Price</label>
                     <input type="number" name="price" value="{{ $product->price }}">
                 </div>
-                <div>
-                    <button type="submit">Update</button>
-                </div>
-            </form>
+                <button type="submit">Update</button>
         </div>
+        </form>
     </div>
+    @endauth
+
+    @guest
+    <h1>Homepage</h1>
+    <p class="lead">You don't have permission to edit.</p>
+    <div class="links">
+        <a href="{{ config('app.url')}}"> Home </a>
+    </div>
+    @endguest
 </body>
 
 </html>
+@endsection
