@@ -38,11 +38,14 @@
                 <button type="submit">Update</button>
         </div>
         </form>
+        <div class="links">
+            <a href="{{ config('app.url')}}"> Home </a>
+        </div>
     </div>
     @endauth
 
     @guest
-    <h1>Homepage</h1>
+    <h1>Permission Denied</h1>
     <p class="lead">You don't have permission to edit.</p>
     <div class="links">
         <a href="{{ config('app.url')}}"> Home </a>

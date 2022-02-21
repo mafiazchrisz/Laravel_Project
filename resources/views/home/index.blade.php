@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="bg-light p-5 rounded">
-    @auth
     <div class="flex-center position-ref full-height">
         <div class="content">
             <div class="title-m-b-md">
@@ -13,11 +12,10 @@
             </div>
         </div>
     </div>
-    @endauth
 
-    @guest
+    <!-- @guest
     <h1>Homepage</h1>
     <p class="lead">Your viewing the home page. Please login to view the restricted data.</p>
-    @endguest
+    @endguest -->
 </div>
 @endsection

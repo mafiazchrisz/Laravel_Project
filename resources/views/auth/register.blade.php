@@ -1,9 +1,7 @@
 @extends('layouts.auth-master')
 
 @section('content')
-<div class="links">
-    <a href="{{ config('app.url')}}"> Home </a>
-</div>
+
 <form method="post" action="{{ route('register.perform') }}">
 
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -46,5 +44,8 @@
     <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
 
     @include('auth.partials.copy')
+    <div class="links">
+        <a href="{{ config('app.url')}}"> Home </a>
+    </div>
 </form>
 @endsection

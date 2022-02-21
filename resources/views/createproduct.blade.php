@@ -42,7 +42,7 @@
     @endauth
 
     @guest
-    <h1>Homepage</h1>
+    <h1>Permission Denied</h1>
     <p class="lead">You don't have permission to create.</p>
     <div class="links">
         <a href="{{ config('app.url')}}"> Home </a>
